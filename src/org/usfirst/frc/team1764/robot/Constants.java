@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1764.robot;
 
 public class Constants {
-	//				Control Scheme			\\
+	//				Control Scheme			\\\
 	
 	//These are the controller axes for each drive axis.
 	public static int XBOX_DRIVE_X_AXIS = 2;
