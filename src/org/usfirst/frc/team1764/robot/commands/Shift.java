@@ -4,9 +4,6 @@ import org.usfirst.frc.team1764.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class Shift extends Command {
 	private boolean done = false;
 	private boolean gear;

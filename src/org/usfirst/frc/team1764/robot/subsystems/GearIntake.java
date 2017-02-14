@@ -24,12 +24,9 @@ public class GearIntake extends Subsystem {
     
     public void setState(boolean state) {
     	this.state = state;
-    	if(state)
-    	{
+    	if(state) {
     		solenoid.set(DoubleSolenoid.Value.kForward);
-    	}
-    	else
-    	{
+    	} else {
     		solenoid.set(DoubleSolenoid.Value.kReverse);
     	}
     }

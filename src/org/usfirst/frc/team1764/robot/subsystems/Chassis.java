@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1764.robot.subsystems;
 
 import org.usfirst.frc.team1764.robot.RobotMap;
-import org.usfirst.frc.team1764.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team1764.robot.commands.DriveWithRampingJoystick;
 
 import com.ctre.CANTalon;
 
@@ -25,7 +25,7 @@ public class Chassis extends Subsystem {
 	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new DriveWithJoystick());
+    	setDefaultCommand(new DriveWithRampingJoystick());
     }
     
     //				Motors				\\
