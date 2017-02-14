@@ -11,6 +11,7 @@ public class DriveWithRampingJoystick extends Command {
 	double leftSpeed, rightSpeed;
 	double lastLeftSpeed, lastRightSpeed;
 	double lastTime;
+	double deltaLeftSpeed,deltaRightSpeed,deltaTime,kpl,kpr;
     public DriveWithRampingJoystick() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -30,12 +31,12 @@ public class DriveWithRampingJoystick extends Command {
     protected void execute() {
     	leftSpeed = Robot.oi.getDriveX() + Robot.oi.getDriveZ();
     	rightSpeed = Robot.oi.getDriveX() - Robot.oi.getDriveZ();
-    	double deltaLeftSpeed = leftSpeed - lastLeftSpeed;
-    	double deltaRightSpeed = rightSpeed - lastRightSpeed;
-    	double deltaTime = System.currentTimeMillis() - lastTime;
+    	deltaLeftSpeed = leftSpeed - lastLeftSpeed;
+    	deltaRightSpeed = rightSpeed - lastRightSpeed;
+    	deltaTime = System.currentTimeMillis() - lastTime;
     	
-    	double kpl = deltaLeftSpeed/deltaTime;
-    	double kpr = deltaRightSpeed/deltaTime;
+    	kpl = deltaLeftSpeed/deltaTime;
+    	kpr = deltaRightSpeed/deltaTime;
     	
     	Robot.chassis.setSpeedBoth(kpl*leftSpeed, kpr*rightSpeed);
     }
