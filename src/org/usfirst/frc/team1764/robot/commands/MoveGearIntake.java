@@ -1,8 +1,6 @@
 package org.usfirst.frc.team1764.robot.commands;
 
 import org.usfirst.frc.team1764.robot.Robot;
-import org.usfirst.frc.team1764.robot.subsystems.GearIntake.Position;
-
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -10,13 +8,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class MoveGearIntake extends Command {
 	boolean done = false;
-	Position position;
+	boolean state;
 
-    public MoveGearIntake(Position position) {
+    public MoveGearIntake(boolean state) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.gearIntake);
-    	this.position = position;
+    	this.state = state;
     }
 
     // Called just before this Command runs the first time
@@ -26,7 +24,7 @@ public class MoveGearIntake extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(!done) {
-    		Robot.gearIntake.set(this.position);
+    		Robot.gearIntake.setState(this.state);
     		done = true;
     	}
     }

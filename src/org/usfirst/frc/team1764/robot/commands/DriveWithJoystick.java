@@ -9,23 +9,35 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveWithJoystick extends Command {
 	double leftSpeed, rightSpeed;
-
+	double lastLeftSpeed, lastRightSpeed;
+	double lastTime;
     public DriveWithJoystick() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
+    	this.lastLeftSpeed = 0;
+    	this.lastRightSpeed = 0;
+    	this.lastTime = System.currentTimeMillis();
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.chassis.setShifter(Robot.chassis.getShifter());
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	leftSpeed = Robot.oi.getDriveX() + Robot.oi.getDriveZ();
     	rightSpeed = Robot.oi.getDriveX() - Robot.oi.getDriveZ();
-    	Robot.chassis.setSpeedBoth(leftSpeed, rightSpeed);
+    	double deltaLeftSpeed = leftSpeed - lastLeftSpeed;
+    	double deltaRightSpeed = rightSpeed - lastRightSpeed;
+    	double deltaTime = System.currentTimeMillis() - lastTime;
+    	
+    	double kpl = deltaLeftSpeed/deltaTime;
+    	double kpr = deltaRightSpeed/deltaTime;
+    	
+    	Robot.chassis.setSpeedBoth(kpl*leftSpeed, kpr*rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

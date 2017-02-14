@@ -6,6 +6,7 @@ import org.usfirst.frc.team1764.robot.commands.DriveWithJoystick;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Chassis extends Subsystem {
@@ -42,6 +43,14 @@ public class Chassis extends Subsystem {
     public void setSpeedRight(double rightSpeed) {
     	rightBack.set(rightSpeed);
     	rightFront.set(rightSpeed);
+    }
+    public void setPIDSpeedLeft(double leftSpeed) {
+    	leftBack.pidWrite(leftSpeed);
+    	leftFront.pidWrite(leftSpeed);
+    }
+    public void setPIDSpeedRight(double rightSpeed) {
+    	rightBack.pidWrite(rightSpeed);
+    	rightFront.pidWrite(rightSpeed);
     }
     
     public void setSpeedBoth(double leftSpeed, double rightSpeed) {
