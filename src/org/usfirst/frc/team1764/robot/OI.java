@@ -26,17 +26,11 @@ public class OI {
 	
 	//			GETTERS				\\
 	public double getDriveX() {
-		if(pilot.getIsXbox())
-			return pilot.getRawAxis(Constants.XBOX_DRIVE_X_AXIS);
-		else
-			return pilot.getX();
+		return pilot.getRawAxis(Constants.XBOX_DRIVE_X_AXIS) - pilot.getRawAxis(Constants.XBOX_DRIVE_X_NEG_AXIS);
 	}
 	
 	public double getDriveZ() {
-		if(pilot.getIsXbox())
-			return pilot.getRawAxis(Constants.XBOX_DRIVE_Z_AXIS);
-		else
-			return pilot.getZ();
+		return pilot.getRawAxis(Constants.XBOX_DRIVE_Z_AXIS);
 	}
 	
 	public OI() {
@@ -62,7 +56,6 @@ public class OI {
 		
 		runFuelIntake.whileHeld(new RunFuelIntake());
 		gearIntakeToggle.whileHeld(new MoveGearIntake(true));
-		gearIntakeToggle.whenInactive(new MoveGearIntake(false));
 		////////////////
 	}
 }

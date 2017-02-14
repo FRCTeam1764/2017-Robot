@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1764.robot.subsystems;
 
 import org.usfirst.frc.team1764.robot.RobotMap;
+import org.usfirst.frc.team1764.robot.commands.DriveWithJoystick;
 import org.usfirst.frc.team1764.robot.commands.DriveWithRampingJoystick;
 
 import com.ctre.CANTalon;
@@ -22,10 +23,11 @@ public class Chassis extends Subsystem {
 		rightBack = new CANTalon(RobotMap.PORT_CHASSIS_RIGHT_BACK);
 		
 		shifter = new DoubleSolenoid(RobotMap.PORT_CHASSIS_SHIFTER_SOLE_ONE, RobotMap.PORT_CHASSIS_SHIFTER_SOLE_TWO);
+		setShifter(false);
 	}
 	
     public void initDefaultCommand() {
-    	setDefaultCommand(new DriveWithRampingJoystick());
+    	setDefaultCommand(new DriveWithJoystick());
     }
     
     //				Motors				\\
@@ -38,10 +40,12 @@ public class Chassis extends Subsystem {
     	rightBack.set(rightSpeed);
     	rightFront.set(rightSpeed);
     }
+    
     public void setPIDSpeedLeft(double leftSpeed) {
     	leftBack.pidWrite(leftSpeed);
     	leftFront.pidWrite(leftSpeed);
     }
+    
     public void setPIDSpeedRight(double rightSpeed) {
     	rightBack.pidWrite(rightSpeed);
     	rightFront.pidWrite(rightSpeed);
@@ -55,10 +59,11 @@ public class Chassis extends Subsystem {
     //				Shifter				\\
     public void setShifter(boolean highGear) {
     	this.highGear = highGear;
-    	if(highGear)
+    	if(highGear) {
     		shifter.set(DoubleSolenoid.Value.kForward);
-    	else
+    	} else {
     		shifter.set(DoubleSolenoid.Value.kReverse);
+    	}
     }
     
     public boolean getShifter() {
