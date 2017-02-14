@@ -8,7 +8,6 @@ import org.usfirst.frc.team1764.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1764.robot.commands.MoveGearIntake;
 import org.usfirst.frc.team1764.robot.commands.RunFuelIntake;
 import org.usfirst.frc.team1764.robot.commands.Shift;
-import org.usfirst.frc.team1764.robot.subsystems.Chassis.Gear;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -58,8 +57,8 @@ public class OI {
 		////////////////
 		
 		//Bind buttons to commands
-		shiftHigh.whenPressed(new Shift(Gear.HIGH));
-		shiftLow.whenPressed(new Shift(Gear.LOW));
+		shiftHigh.whenPressed(new Shift(true));
+		shiftLow.whenPressed(new Shift(false));
 		
 		runFuelIntake.whileHeld(new RunFuelIntake());
 		gearIntakeToggle.whileHeld(new MoveGearIntake(true));

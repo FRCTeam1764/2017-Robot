@@ -1,7 +1,6 @@
 package org.usfirst.frc.team1764.robot.commands;
 
 import org.usfirst.frc.team1764.robot.Robot;
-import org.usfirst.frc.team1764.robot.subsystems.Chassis.Gear;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,9 +9,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Shift extends Command {
 	private boolean done = false;
-	private Gear gear;
+	private boolean gear;
 
-    public Shift(Gear gear) {
+    public Shift(boolean gear) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);

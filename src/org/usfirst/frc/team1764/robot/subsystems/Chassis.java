@@ -10,13 +10,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Chassis extends Subsystem {
-	
-	public static enum Gear {
-		LOW,
-		HIGH
-	};
-	
-	private Gear gear = Gear.LOW;
+	private boolean highGear = false;
 	
 	private CANTalon leftFront,leftBack, rightFront, rightBack;
 	private DoubleSolenoid shifter;
@@ -59,18 +53,16 @@ public class Chassis extends Subsystem {
     }
     
     //				Shifter				\\
-    public void setShifter(Gear gear) {
-    	this.gear = gear;
-    	switch(gear) {
-    	case HIGH:
+    public void setShifter(boolean highGear) {
+    	this.highGear = highGear;
+    	if(highGear)
     		shifter.set(DoubleSolenoid.Value.kForward);
-    	case LOW:
+    	else
     		shifter.set(DoubleSolenoid.Value.kReverse);
-    	}
     }
     
-    public Gear getShifter() {
-    	return gear;
+    public boolean getShifter() {
+    	return highGear;
     }
 }
 
