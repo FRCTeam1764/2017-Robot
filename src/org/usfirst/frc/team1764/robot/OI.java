@@ -36,6 +36,7 @@ public class OI {
 	public OI() {
 		pilot = new Joystick(0);
 		copilot = new Joystick(1);
+		
 		//Assign Buttons
 		if(Constants.COPILOT_ENABLED) {
 			runFuelIntake = new JoystickButton(copilot, Constants.COPILOT_FUELINTAKE_BUTTON);
@@ -54,7 +55,9 @@ public class OI {
 		shiftLow.whenPressed(new Shift(false));
 		
 		runFuelIntake.whileHeld(new RunFuelIntake());
-		gearIntakeToggle.whileHeld(new MoveGearIntake(true));
+		
+		gearIntakeToggle.whenActive(new MoveGearIntake(true));
+		gearIntakeToggle.whenInactive(new MoveGearIntake(false));
 		////////////////
 	}
 }
