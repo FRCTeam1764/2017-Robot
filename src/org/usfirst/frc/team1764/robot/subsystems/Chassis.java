@@ -23,7 +23,6 @@ public class Chassis extends Subsystem {
 		rightBack = new CANTalon(RobotMap.PORT_CHASSIS_RIGHT_BACK);
 		
 		shifter = new DoubleSolenoid(RobotMap.PORT_CHASSIS_SHIFTER_SOLE_ONE, RobotMap.PORT_CHASSIS_SHIFTER_SOLE_TWO);
-		setShifter(false);
 	}
 	
     public void initDefaultCommand() {

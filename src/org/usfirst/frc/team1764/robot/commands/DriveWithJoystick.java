@@ -18,7 +18,6 @@ public class DriveWithJoystick extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.chassis.setShifter(Robot.chassis.getShifter());
     }
 
     // Called repeatedly when this Command is scheduled to run

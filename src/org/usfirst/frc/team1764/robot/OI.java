@@ -36,7 +36,6 @@ public class OI {
 	public OI() {
 		pilot = new Joystick(0);
 		copilot = new Joystick(1);
-		
 		//Assign Buttons
 		if(Constants.COPILOT_ENABLED) {
 			runFuelIntake = new JoystickButton(copilot, Constants.COPILOT_FUELINTAKE_BUTTON);

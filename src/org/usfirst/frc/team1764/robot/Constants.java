@@ -9,7 +9,7 @@ public class Constants {
 	public static int XBOX_DRIVE_Z_AXIS = 0;
 	
 	//Should the pilot control everything?
-	public static boolean COPILOT_ENABLED = true;
+	public static boolean COPILOT_ENABLED = false;
 	
 	//Button id for shift up and shift down buttons
 	public static int PILOT_SHIFT_UP_BUTTON = 6;
