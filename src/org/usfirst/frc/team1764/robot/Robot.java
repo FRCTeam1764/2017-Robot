@@ -13,6 +13,7 @@ import org.usfirst.frc.team1764.robot.subsystems.Chassis;
 import org.usfirst.frc.team1764.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1764.robot.subsystems.FuelIntake;
 import org.usfirst.frc.team1764.robot.subsystems.GearIntake;
+import org.usfirst.frc.team1764.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -27,6 +28,7 @@ public class Robot extends IterativeRobot {
 	public static final Chassis chassis = new Chassis();
 	public static final FuelIntake fuelIntake = new FuelIntake();
 	public static final GearIntake gearIntake = new GearIntake();
+	public static final Shooter shooter = new Shooter();
 	public static OI oi;
 	public static Sensors sensors;
 

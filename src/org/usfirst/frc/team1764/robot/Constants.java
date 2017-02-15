@@ -27,4 +27,7 @@ public class Constants {
 	
 	//Speed setting for fuel intake
 	public static double FUELINTAKE_SPEED_BOTH = 1.0;
+	
+	//Speed for flywheel
+	public static double FLYWHEEL_SPEED = 1.0;
 }
