@@ -41,8 +41,8 @@ public class Chassis extends Subsystem {
     }
     
     public void setPIDSpeedLeft(double leftSpeed) {
-    	leftBack.pidWrite(leftSpeed);
-    	leftFront.pidWrite(leftSpeed);
+    	leftBack.pidWrite(-leftSpeed);
+    	leftFront.pidWrite(-leftSpeed);
     }
     
     public void setPIDSpeedRight(double rightSpeed) {

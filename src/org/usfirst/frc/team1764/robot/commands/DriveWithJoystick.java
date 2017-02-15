@@ -22,8 +22,8 @@ public class DriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	leftSpeed = Robot.oi.getDriveX() + Robot.oi.getDriveZ();
-    	rightSpeed = Robot.oi.getDriveX() - Robot.oi.getDriveZ();
+    	leftSpeed = Robot.oi.getDriveX() - Robot.oi.getDriveZ();
+    	rightSpeed = Robot.oi.getDriveX() + Robot.oi.getDriveZ();
     	
     	Robot.chassis.setSpeedBoth(leftSpeed, rightSpeed);
     }

@@ -21,10 +21,8 @@ public class Shift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!done) {
-    		Robot.chassis.setShifter(gear);
-    		done = true;
-    	}
+    	Robot.chassis.setShifter(gear);
+    	done = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
