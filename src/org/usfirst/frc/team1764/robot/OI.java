@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team1764.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1764.robot.commands.MoveGearIntake;
 import org.usfirst.frc.team1764.robot.commands.RunFuelIntake;
+import org.usfirst.frc.team1764.robot.commands.RunShooter;
 import org.usfirst.frc.team1764.robot.commands.Shift;
 
 /**
@@ -23,6 +24,8 @@ public class OI {
 	
 	JoystickButton gearIntakeToggle;
 	JoystickButton runFuelIntake;
+	
+	JoystickButton flywheelButton;
 	
 	//			GETTERS				\\
 	public double getDriveX() {
@@ -41,9 +44,11 @@ public class OI {
 		if(Constants.COPILOT_ENABLED) {
 			runFuelIntake = new JoystickButton(copilot, Constants.COPILOT_FUELINTAKE_BUTTON);
 			gearIntakeToggle = new JoystickButton(copilot, Constants.COPILOT_GEARINTAKE_TOGGLE_BUTTON);
+			flywheelButton = new JoystickButton(copilot, Constants.COPILOT_FLYWHEEL_BUTTON);
 		} else {
 			runFuelIntake = new JoystickButton(pilot, Constants.PILOT_FUELINTAKE_BUTTON);
 			gearIntakeToggle = new JoystickButton(pilot, Constants.PILOT_GEARINTAKE_TOGGLE_BUTTON);
+			flywheelButton = new JoystickButton(pilot, Constants.PILOT_FLYWHEEL_BUTTON);
 		}
 		
 		shiftHigh = new JoystickButton(pilot, Constants.PILOT_SHIFT_UP_BUTTON);
@@ -58,6 +63,8 @@ public class OI {
 		
 		gearIntakeToggle.whenActive(new MoveGearIntake(true));
 		gearIntakeToggle.whenInactive(new MoveGearIntake(false));
+		
+		flywheelButton.whileActive(new RunShooter());
 		////////////////
 	}
 }

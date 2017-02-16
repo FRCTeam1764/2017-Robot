@@ -18,12 +18,14 @@ public class Constants {
 	//These are the bindings used when copilot is enabled
 	//They will be on the second(copilot's) joystick.
 	public static int COPILOT_FUELINTAKE_BUTTON = 3;
+	public static int COPILOT_FLYWHEEL_BUTTON = 2;
 	public static int COPILOT_GEARINTAKE_TOGGLE_BUTTON = 1;
 	
 	//These are the bindings used when copilot is not enabled
 	//They will be on the first(pilot's) joystick.
 	public static int PILOT_FUELINTAKE_BUTTON = 1;
 	public static int PILOT_GEARINTAKE_TOGGLE_BUTTON = 2;
+	public static int PILOT_FLYWHEEL_BUTTON = 3;
 	
 	//Speed setting for fuel intake
 	public static double FUELINTAKE_SPEED_BOTH = 1.0;
