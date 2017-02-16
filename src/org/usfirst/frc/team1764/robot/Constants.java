@@ -31,5 +31,5 @@ public class Constants {
 	public static double FUELINTAKE_SPEED_BOTH = 1.0;
 	
 	//Speed for flywheel
-	public static double FLYWHEEL_SPEED = 1.0;
+	public static double FLYWHEEL_SPEED = 0.85;
 }
