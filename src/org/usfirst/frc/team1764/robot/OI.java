@@ -28,12 +28,20 @@ public class OI {
 	JoystickButton flywheelButton;
 	
 	//			GETTERS				\\
-	public double getDriveX() {
-		return pilot.getRawAxis(Constants.XBOX_DRIVE_X_AXIS) - pilot.getRawAxis(Constants.XBOX_DRIVE_X_NEG_AXIS);
+	public double getDriveY() {
+		if(pilot.getIsXbox()) {
+			return pilot.getRawAxis(Constants.XBOX_DRIVE_X_AXIS) - pilot.getRawAxis(Constants.XBOX_DRIVE_X_NEG_AXIS);
+		} else {
+			return pilot.getY();
+		}
 	}
 	
 	public double getDriveZ() {
-		return pilot.getRawAxis(Constants.XBOX_DRIVE_Z_AXIS);
+		if(pilot.getIsXbox()) {
+			return pilot.getRawAxis(Constants.XBOX_DRIVE_Z_AXIS);
+		} else {
+			return pilot.getZ();
+		}
 	}
 	
 	public OI() {

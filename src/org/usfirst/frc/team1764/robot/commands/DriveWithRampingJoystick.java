@@ -27,8 +27,8 @@ public class DriveWithRampingJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	leftSpeed = Robot.oi.getDriveX() + Robot.oi.getDriveZ();
-    	rightSpeed = Robot.oi.getDriveX() - Robot.oi.getDriveZ();
+    	leftSpeed = Robot.oi.getDriveY() + Robot.oi.getDriveZ();
+    	rightSpeed = Robot.oi.getDriveY() - Robot.oi.getDriveZ();
     	deltaLeftSpeed = leftSpeed - lastLeftSpeed;
     	deltaRightSpeed = rightSpeed - lastRightSpeed;
     	deltaTime = System.currentTimeMillis() - lastTime;
