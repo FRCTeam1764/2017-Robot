@@ -67,7 +67,7 @@ public class OI {
 		shiftHigh.whenPressed(new Shift(true));
 		shiftLow.whenPressed(new Shift(false));
 		
-		runFuelIntake.whileHeld(new RunFuelIntake());
+		//runFuelIntake.whileHeld(new RunFuelIntake());
 		
 		gearIntakeToggle.whenActive(new MoveGearIntake(true));
 		gearIntakeToggle.whenInactive(new MoveGearIntake(false));
