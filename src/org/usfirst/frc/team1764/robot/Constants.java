@@ -46,10 +46,10 @@ public class Constants {
 	public static double FUELINTAKE_SPEED_BOTH = 1.0;
 	
 	//Speed for flywheel
-	public static double FLYWHEEL_SPEED = 0.75;
-	public static double INTAKE_SPEED = 0.9;
+	public static double FLYWHEEL_SPEED = 0.65;
+	public static double INTAKE_SPEED = 0.7;
 	
 	//Time for the flywheel-feeding system delay (the time it wamrs up the flywheel for)
-	public static double INTAKE_WARMUP = 1;
+	public static double INTAKE_WARMUP = 2.5;
 	
 }
