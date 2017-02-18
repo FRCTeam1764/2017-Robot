@@ -14,6 +14,7 @@ import org.usfirst.frc.team1764.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1764.robot.subsystems.Feeder;
 import org.usfirst.frc.team1764.robot.subsystems.FuelIntake;
 import org.usfirst.frc.team1764.robot.subsystems.GearIntake;
+import org.usfirst.frc.team1764.robot.subsystems.Lifter;
 import org.usfirst.frc.team1764.robot.subsystems.Shooter;
 
 /**
@@ -31,6 +32,8 @@ public class Robot extends IterativeRobot {
 	public static final GearIntake gearIntake = new GearIntake();
 	public static final Shooter shooter = new Shooter();
 	public static final Feeder feeder = new Feeder();
+	public static final Lifter lifter = new Lifter();
+
 	public static OI oi;
 	public static Sensors sensors;
 

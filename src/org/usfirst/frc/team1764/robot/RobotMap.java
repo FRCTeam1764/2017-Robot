@@ -8,6 +8,8 @@ package org.usfirst.frc.team1764.robot;
  */
 public class RobotMap {
 	
+	public static final int PORT_LIFTER = 4;
+
 	public static int PORT_SHOOTER_FLYWHEEL = 2;
 	
 	//				CHASSIS						\\
@@ -27,4 +29,7 @@ public class RobotMap {
 	//				BALL INTAKE					\\
 	public static int PORT_BALLINTAKE_NOODLE = 1;
 	public static int PORT_BALLINTAKE_BELT = 0;
+	
+	//				CLIMBING   					\\
+	public static int PORT_CLIMBER_MOTOR = 4;
 }
