@@ -33,7 +33,6 @@ public class OI {
 	JoystickButton feederButton;
 	JoystickButton lifterButton;
 	
-	
 	//			GETTERS				\\
 	public double getDriveY() {
 		if(pilot.getIsXbox()) {
@@ -56,17 +55,16 @@ public class OI {
 		copilot = new Joystick(1);
 		
 		//Assign Buttons
-		gearIntakeToggle = new JoystickButton(pilot, Constants.PILOT_XBOX_GEARINTAKE_TOGGLE_BUTTON);
 		
 		if(Constants.COPILOT_ENABLED) {
 			runFuelIntake = new JoystickButton(copilot, Constants.COPILOT_FUELINTAKE_BUTTON);
-			//gearIntakeToggle = new JoystickButton(copilot, Constants.COPILOT_GEARINTAKE_TOGGLE_BUTTON);
+			gearIntakeToggle = new JoystickButton(copilot, Constants.COPILOT_GEARINTAKE_TOGGLE_BUTTON);
 			flywheelButton = new JoystickButton(copilot, Constants.COPILOT_FLYWHEEL_BUTTON);
 			feederButton = new JoystickButton(copilot, Constants.COPILOT_FEEDER_BUTTON);
 		} else {
 			if (pilot.getIsXbox()) {
 				runFuelIntake = new JoystickButton(pilot, Constants.PILOT_XBOX_FUELINTAKE_BUTTON);
-				//gearIntakeToggle = new JoystickButton(pilot, Constants.PILOT_XBOX_GEARINTAKE_TOGGLE_BUTTON);
+				gearIntakeToggle = new JoystickButton(pilot, Constants.PILOT_XBOX_GEARINTAKE_TOGGLE_BUTTON);
 				flywheelButton = new JoystickButton(pilot, Constants.PILOT_XBOX_FLYWHEEL_BUTTON);
 				feederButton = new JoystickButton(pilot, Constants.PILOT_XBOX_FEEDER_BUTTON);
 			} else {
