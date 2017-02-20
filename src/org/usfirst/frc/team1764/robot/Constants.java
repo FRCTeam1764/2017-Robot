@@ -15,18 +15,18 @@ public class Constants {
 	
 	//Button id for shift up and shift down buttons
 	public static int PILOT_SHIFT_UP_BUTTON = 5;
-	public static int PILOT_SHIFT_DOWN_BUTTON = 3;
+	public static int PILOT_SHIFT_DOWN_BUTTON = 6;
 	
-	public static int PILOT_XBOX_SHIFT_UP_BUTTON = 4;
-	public static int PILOT_XBOX_SHIFT_DOWN_BUTTON = 2;
+	public static int PILOT_XBOX_SHIFT_UP_BUTTON = 5; //LB
+	public static int PILOT_XBOX_SHIFT_DOWN_BUTTON = 6; //RB
 	
 	//These are the bindings used when copilot is enabled
 	//They will be on the second(copilot's) joystick.
 	public static int COPILOT_FUELINTAKE_BUTTON = 3;
 	public static int COPILOT_FLYWHEEL_BUTTON = 1;
 	public static int COPILOT_GEARINTAKE_TOGGLE_BUTTON = 2;
-	public static int COPILOT_FEEDER_BUTTON = 4;
-	public static int COPILOT_LIFTER_BUTTON = 5;
+	public static int COPILOT_FEEDER_BUTTON = 9;
+	public static int COPILOT_LIFTER_BUTTON = 9;
 	
 	//These are the bindings used when copilot is not enabled
 	//They will be on the first(pilot's) joystick.
@@ -42,14 +42,15 @@ public class Constants {
 	public static int PILOT_XBOX_FLYWHEEL_BUTTON = 1; //A
 	public static int PILOT_XBOX_FEEDER_BUTTON = 8; //START
 	public static int PILOT_XBOX_LIFTER_BUTTON = 4; //Y
+
 	//Speed setting for fuel intake
 	public static double FUELINTAKE_SPEED_BOTH = 1.0;
 	
 	//Speed for flywheel
-	public static double FLYWHEEL_SPEED = 0.65;
-	public static double INTAKE_SPEED = 0.7;
+	//DO NOT CHANGE THESE VALUES -AUSTIN
+	public static double FLYWHEEL_SPEED = -75;
+	public static double INTAKE_SPEED = .235;
 	
-	//Time for the flywheel-feeding system delay (the time it wamrs up the flywheel for)
-	public static double INTAKE_WARMUP = 2.5;
-	
+	//Time for the flywheel-feeding system delay (the time it warms up the flywheel for)
+	public static double INTAKE_WARMUP = 1.5;
 }

@@ -6,6 +6,7 @@ import org.usfirst.frc.team1764.robot.commands.DriveWithRampingJoystick;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,6 +16,7 @@ public class Chassis extends Subsystem {
 	
 	private CANTalon leftFront,leftBack, rightFront, rightBack;
 	private DoubleSolenoid shifter;
+	private Compressor compressor; 
 	
 	public Chassis() {
 		leftFront = new CANTalon(RobotMap.PORT_CHASSIS_LEFT_FRONT);
@@ -23,6 +25,7 @@ public class Chassis extends Subsystem {
 		rightBack = new CANTalon(RobotMap.PORT_CHASSIS_RIGHT_BACK);
 		
 		shifter = new DoubleSolenoid(RobotMap.PORT_CHASSIS_SHIFTER_SOLE_ONE, RobotMap.PORT_CHASSIS_SHIFTER_SOLE_TWO);
+		compressor = new Compressor(0);
 	}
 	
     public void initDefaultCommand() {
@@ -33,6 +36,10 @@ public class Chassis extends Subsystem {
     public void setSpeedLeft(double leftSpeed) {
     	leftBack.set(-leftSpeed);
     	leftFront.set(-leftSpeed);
+    }
+    public void turnOnCompressor() //This runs the compressor at the start of the round rather than the first time you try to shift
+    {
+    	compressor.start();
     }
     
     public void setSpeedRight(double rightSpeed) {
@@ -51,6 +58,7 @@ public class Chassis extends Subsystem {
     }
     
     public void setSpeedBoth(double leftSpeed, double rightSpeed) {
+    	System.out.println(leftSpeed + ":" + rightSpeed);
     	setSpeedLeft(leftSpeed);
     	setSpeedRight(rightSpeed);
     }

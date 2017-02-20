@@ -18,13 +18,14 @@ public class DriveWithJoystick extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.chassis.turnOnCompressor();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	leftSpeed = Robot.oi.getDriveY() - Robot.oi.getDriveZ();
     	rightSpeed = Robot.oi.getDriveY() + Robot.oi.getDriveZ();
-    	
+    	Robot.chassis.turnOnCompressor();
     	Robot.chassis.setSpeedBoth(leftSpeed, rightSpeed);
     }
 

@@ -29,6 +29,5 @@ public class ShooterGroup extends CommandGroup {
     	addSequential(new RunShooter(true)); //First, run the shooter for Constants.INTAKE_WARMUP
     	addParallel(new RunFeeder(Constants.INTAKE_SPEED)); //Secondly, run both the shooter and the feeder
     	addParallel(new RunShooter(false));
-    
     }
 }
