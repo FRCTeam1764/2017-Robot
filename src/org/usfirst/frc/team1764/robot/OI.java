@@ -55,7 +55,6 @@ public class OI {
 		copilot = new Joystick(1);
 		
 		//Assign Buttons
-		
 		if(Constants.COPILOT_ENABLED) {
 			runFuelIntake = new JoystickButton(copilot, Constants.COPILOT_FUELINTAKE_BUTTON);
 			gearIntakeToggle = new JoystickButton(copilot, Constants.COPILOT_GEARINTAKE_TOGGLE_BUTTON);
@@ -83,7 +82,6 @@ public class OI {
 			lifterButton = new JoystickButton(pilot, Constants.PILOT_LIFTER_BUTTON);
 		}
 		
-		
 		////////////////
 		
 		//Bind buttons to commands
@@ -99,6 +97,5 @@ public class OI {
 		
 		flywheelButton.toggleWhenPressed(new ShooterGroup());
 		lifterButton.whileHeld(new RunLifter(true));
-		////////////////
 	}
 }
