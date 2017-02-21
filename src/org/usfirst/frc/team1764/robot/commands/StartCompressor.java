@@ -4,18 +4,21 @@ import org.usfirst.frc.team1764.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class Shift extends InstantCommand {
-	private boolean gear;
+/**
+ *
+ */
+public class StartCompressor extends InstantCommand {
 
-    public Shift(boolean gear) {
+    public StartCompressor() {
+        super();
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.chassis);
-    	this.gear = gear;
+        requires(Robot.pneumaticsCompressor);
     }
 
-    // Called just before this Command runs the first time
+    // Called once when the command executes
     protected void initialize() {
-    	Robot.chassis.setShifter(gear);
+    	Robot.pneumaticsCompressor.start();
     }
+
 }
