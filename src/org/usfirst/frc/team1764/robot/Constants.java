@@ -49,7 +49,7 @@ public class Constants {
 	
 	//Speed for flywheel
 	//DO NOT CHANGE THESE VALUES -AUSTIN
-	public static double FLYWHEEL_SPEED = -75;
+	public static double FLYWHEEL_SPEED = -75; //the maximum speed is 1.0...
 	public static double INTAKE_SPEED = .235;
 	
 	//Time for the flywheel-feeding system delay (the time it warms up the flywheel for)
