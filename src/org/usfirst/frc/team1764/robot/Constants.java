@@ -5,6 +5,7 @@ public class Constants {
 	
 	//These are the controller axes for each drive axis.
 	
+	
 	public static int XBOX_DRIVE_TURNING = 0;
 	public static int XBOX_DRIVE_FWD = 2;
 	public static int XBOX_DRIVE_BACK = 3;
@@ -53,4 +54,8 @@ public class Constants {
 	
 	//Time for the flywheel-feeding system delay (the time it warms up the flywheel for)
 	public static double INTAKE_WARMUP = 1.5;
+	
+	//Lifter
+	public static double LIFTER_SPEED = 1.0;
+	public static boolean LIFTER_ISINVERTED = true;
 }

@@ -98,7 +98,7 @@ public class OI {
 		feederButton.whileHeld(new RunFeeder(Constants.INTAKE_SPEED));
 		
 		flywheelButton.toggleWhenPressed(new ShooterGroup());
-		lifterButton.whileHeld(new RunLifter(-1.0));
+		lifterButton.whileHeld(new RunLifter(true));
 		////////////////
 	}
 }
