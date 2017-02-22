@@ -6,6 +6,7 @@ import org.usfirst.frc.team1764.robot.commands.DriveWithRampingJoystick;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -51,6 +52,7 @@ public class Chassis extends Subsystem {
     }
     
     public void setSpeedBoth(double leftSpeed, double rightSpeed) {
+    	System.out.println(leftSpeed + ":" + rightSpeed);
     	setSpeedLeft(leftSpeed);
     	setSpeedRight(rightSpeed);
     }

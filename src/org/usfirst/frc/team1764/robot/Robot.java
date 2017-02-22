@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1764.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -8,11 +9,15 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1764.robot.commands.AutoGroup;
 import org.usfirst.frc.team1764.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1764.robot.subsystems.Chassis;
 import org.usfirst.frc.team1764.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team1764.robot.subsystems.Feeder;
 import org.usfirst.frc.team1764.robot.subsystems.FuelIntake;
 import org.usfirst.frc.team1764.robot.subsystems.GearIntake;
+import org.usfirst.frc.team1764.robot.subsystems.Lifter;
+import org.usfirst.frc.team1764.robot.subsystems.PneumaticsCompressor;
 import org.usfirst.frc.team1764.robot.subsystems.Shooter;
 
 /**
@@ -25,10 +30,14 @@ import org.usfirst.frc.team1764.robot.subsystems.Shooter;
 public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final PneumaticsCompressor pneumaticsCompressor = new PneumaticsCompressor();
 	public static final Chassis chassis = new Chassis();
 	public static final FuelIntake fuelIntake = new FuelIntake();
 	public static final GearIntake gearIntake = new GearIntake();
 	public static final Shooter shooter = new Shooter();
+	public static final Feeder feeder = new Feeder();
+	public static final Lifter lifter = new Lifter();
+
 	public static OI oi;
 	public static Sensors sensors;
 
@@ -41,12 +50,14 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		CameraServer.getInstance().startAutomaticCapture();
 		oi = new OI();
 		sensors = new Sensors();
 		
 		chassis.setShifter(false);
 		
 		chooser.addDefault("Default Auto", new ExampleCommand());
+		chooser.addObject("Good Auto", new AutoGroup());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
