@@ -22,7 +22,7 @@ public class GearIntake extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void setState(boolean state) {
+    public void set(boolean state) {
     	this.state = state;
     	if(!state) {
     		solenoid.set(DoubleSolenoid.Value.kForward);

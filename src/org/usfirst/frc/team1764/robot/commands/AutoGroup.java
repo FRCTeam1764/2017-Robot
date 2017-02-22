@@ -1,15 +1,13 @@
 package org.usfirst.frc.team1764.robot.commands;
 
-import org.usfirst.frc.team1764.robot.Constants;
-
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class ShooterGroup extends CommandGroup {
+public class AutoGroup extends CommandGroup {
 
-    public ShooterGroup() {
+    public AutoGroup() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -26,8 +24,9 @@ public class ShooterGroup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new RunShooterForTime(Constants.INTAKE_WARMUP)); //First, run the shooter for Constants.INTAKE_WARMUP
-    	addParallel(new RunFeeder(Constants.INTAKE_SPEED)); //Secondly, run both the shooter and the feeder
-    	addParallel(new RunShooter());
+    	addSequential(new DriveForTime(2));
+    	addSequential(new MoveGearIntake(false));
+    	addSequential(new DriveForTime(3));
+    	addSequential(new MoveGearIntake(true));
     }
 }

@@ -1,51 +1,39 @@
 package org.usfirst.frc.team1764.robot.commands;
 
-
+import org.usfirst.frc.team1764.robot.Constants;
 import org.usfirst.frc.team1764.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  *
  */
-public class StopFeeder extends Command {
+public class RunShooterForTime extends TimedCommand {
 
-	Timer timer;
-    public StopFeeder() {
+    public RunShooterForTime(double timeout) {
+        super(timeout);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.feeder);
-    	this.timer = new Timer();
+        requires(Robot.shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.feeder.set(-1);
+    	Robot.shooter.set(Constants.FLYWHEEL_SPEED);;
     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	if (timer.get() == 1)
-    	{
-    		return true;
-    	}
-        return false;
-    }
-
-    // Called once after isFinished returns true
+    // Called once after timeout
     protected void end() {
-    	Robot.feeder.set(0);
+    	Robot.shooter.set(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.feeder.set(0);
+    	Robot.shooter.set(0);
     }
 }

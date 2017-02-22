@@ -19,13 +19,11 @@ public class RunFeeder extends Command {
         requires(Robot.feeder);
         this.speed = speed;
         this.timer = new Timer();
-       
     }
  
     // Called just before this Command runs the first time
     protected void initialize() {
         timer.start();
-       
     }
  
     // Called repeatedly when this Command is scheduled to run

@@ -12,7 +12,6 @@ import org.usfirst.frc.team1764.robot.commands.RunLifter;
 import org.usfirst.frc.team1764.robot.commands.RunShooter;
 import org.usfirst.frc.team1764.robot.commands.Shift;
 import org.usfirst.frc.team1764.robot.commands.ShooterGroup;
-import org.usfirst.frc.team1764.robot.commands.StopFeeder;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -33,7 +32,6 @@ public class OI {
 	
 	JoystickButton feederButton;
 	JoystickButton lifterButton;
-	
 	
 	//			GETTERS				\\
 	public double getDriveY() {
@@ -57,42 +55,32 @@ public class OI {
 		copilot = new Joystick(1);
 		
 		//Assign Buttons
-		gearIntakeToggle = new JoystickButton(pilot, Constants.PILOT_XBOX_GEARINTAKE_TOGGLE_BUTTON);
-		
 		if(Constants.COPILOT_ENABLED) {
 			runFuelIntake = new JoystickButton(copilot, Constants.COPILOT_FUELINTAKE_BUTTON);
-			//gearIntakeToggle = new JoystickButton(copilot, Constants.COPILOT_GEARINTAKE_TOGGLE_BUTTON);
+			gearIntakeToggle = new JoystickButton(copilot, Constants.COPILOT_GEARINTAKE_TOGGLE_BUTTON);
 			flywheelButton = new JoystickButton(copilot, Constants.COPILOT_FLYWHEEL_BUTTON);
 			feederButton = new JoystickButton(copilot, Constants.COPILOT_FEEDER_BUTTON);
 		} else {
-			if (pilot.getIsXbox())
-			{
+			if (pilot.getIsXbox()) {
 				runFuelIntake = new JoystickButton(pilot, Constants.PILOT_XBOX_FUELINTAKE_BUTTON);
-				//gearIntakeToggle = new JoystickButton(pilot, Constants.PILOT_XBOX_GEARINTAKE_TOGGLE_BUTTON);
+				gearIntakeToggle = new JoystickButton(pilot, Constants.PILOT_XBOX_GEARINTAKE_TOGGLE_BUTTON);
 				flywheelButton = new JoystickButton(pilot, Constants.PILOT_XBOX_FLYWHEEL_BUTTON);
 				feederButton = new JoystickButton(pilot, Constants.PILOT_XBOX_FEEDER_BUTTON);
-			}
-			else
-			{
+			} else {
 				runFuelIntake = new JoystickButton(pilot, Constants.PILOT_FUELINTAKE_BUTTON);
 				gearIntakeToggle = new JoystickButton(pilot, Constants.PILOT_GEARINTAKE_TOGGLE_BUTTON);
 				flywheelButton = new JoystickButton(pilot, Constants.PILOT_FLYWHEEL_BUTTON);
 				feederButton = new JoystickButton(pilot, Constants.PILOT_FEEDER_BUTTON);
 			}
-		}
-		if(pilot.getIsXbox())
-		{
+		} if(pilot.getIsXbox()) {
 			shiftHigh = new JoystickButton(pilot, Constants.PILOT_XBOX_SHIFT_UP_BUTTON);
 			shiftLow = new JoystickButton(pilot, Constants.PILOT_XBOX_SHIFT_DOWN_BUTTON);
 			lifterButton = new JoystickButton(pilot, Constants.PILOT_XBOX_LIFTER_BUTTON);
-		}
-		else
-		{
+		} else {
 			shiftHigh = new JoystickButton(pilot, Constants.PILOT_SHIFT_UP_BUTTON);
 			shiftLow = new JoystickButton(pilot, Constants.PILOT_SHIFT_DOWN_BUTTON);
 			lifterButton = new JoystickButton(pilot, Constants.PILOT_LIFTER_BUTTON);
 		}
-		
 		
 		////////////////
 		
@@ -107,11 +95,7 @@ public class OI {
 		
 		feederButton.whileHeld(new RunFeeder(Constants.INTAKE_SPEED));
 		
-		
-		//flywheelButton.whileActive(new RunShooter(false));
 		flywheelButton.toggleWhenPressed(new ShooterGroup());
-//		flywheelButton.toggleWhenReleased(new StopFeeder());
-		lifterButton.whileHeld(new RunLifter(-1.0));
-		////////////////
+		lifterButton.whileHeld(new RunLifter(true));
 	}
 }

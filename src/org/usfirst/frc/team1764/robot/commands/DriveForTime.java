@@ -1,20 +1,19 @@
 package org.usfirst.frc.team1764.robot.commands;
 
-import org.usfirst.frc.team1764.robot.Constants;
 import org.usfirst.frc.team1764.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  *
  */
-public class RunShooter extends Command {
-	
-    public RunShooter() {
+public class DriveForTime extends TimedCommand {
+
+    public DriveForTime(double timeout) {
+        super(timeout);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.shooter);
+        requires(Robot.chassis);
     }
 
     // Called just before this Command runs the first time
@@ -23,22 +22,17 @@ public class RunShooter extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.set(Constants.FLYWHEEL_SPEED);
+    	Robot.chassis.setSpeedBoth(1, 1);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
-
-    // Called once after isFinished returns true
+    // Called once after timeout
     protected void end() {
-    	Robot.shooter.set(0);
+    	Robot.chassis.setSpeedBoth(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shooter.set(0);
+    	Robot.chassis.setSpeedBoth(0, 0);
     }
 }

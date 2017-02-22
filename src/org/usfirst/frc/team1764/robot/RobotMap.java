@@ -7,7 +7,6 @@ package org.usfirst.frc.team1764.robot;
  * floating around.
  */
 public class RobotMap {
-	
 	public static final int PORT_LIFTER = 4;
 
 	public static int PORT_SHOOTER_FLYWHEEL = 2;
