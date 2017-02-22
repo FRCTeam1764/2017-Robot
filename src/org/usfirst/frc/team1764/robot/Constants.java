@@ -1,10 +1,19 @@
 package org.usfirst.frc.team1764.robot;
 
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
+
+
 public class Constants {
 	//				Control Scheme			\\\
 	
 	//These are the controller axes for each drive axis.
-	
+	 
+	/*
+	 * IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	 * THIS MUST BE TRUE IF YOU ARE USING THE COMPETITION ROBOT OR CERTAIN PARTS MAY NOT WORK!
+	 */
+	public static boolean ROBOT_IS_COMPETITION_ROBOT = true; 
 	
 	public static int XBOX_DRIVE_TURNING = 0;
 	public static int XBOX_DRIVE_FWD = 2;
@@ -58,4 +67,8 @@ public class Constants {
 	//Lifter
 	public static double LIFTER_SPEED = 1.0;
 	public static boolean LIFTER_ISINVERTED = true;
+	
+	public static boolean USE_PID_INTAKE_DELAY = true; //true: use more accurate delays for feeding that wait for the flywheel to be at a precise speed - false: use timed measurements
+	
+	public static int TIMED_BASED_INTAKE_DELAY = 4; // 1/x seconds, ex. if it is 2 it will run for 1/2 second, stop, then repeat
 }

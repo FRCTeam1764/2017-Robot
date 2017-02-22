@@ -26,8 +26,10 @@ public class ShooterGroup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new RunShooterForTime(Constants.INTAKE_WARMUP)); //First, run the shooter for Constants.INTAKE_WARMUP
-    	addParallel(new RunFeeder(Constants.INTAKE_SPEED)); //Secondly, run both the shooter and the feeder
+    	if (!Constants.USE_PID_INTAKE_DELAY) { //only need to warmup if time-delay, pid will wait for shooter to be at good speed before feeding.
+    		addSequential(new RunShooterForTime(Constants.INTAKE_WARMUP)); //First, run the shooter for Constants.INTAKE_WARMUP
+    	}
+    	addParallel(new RunFeeder()); //Secondly, run both the shooter and the feeder
     	addParallel(new RunShooter());
     }
 }

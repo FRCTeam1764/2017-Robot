@@ -24,6 +24,12 @@ public class RunShooter extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.shooter.set(Constants.FLYWHEEL_SPEED);
+    	Robot.shooter.DEBUGREMOVE();
+    	if (Robot.shooter.returnPIDInput() > 99999 && Robot.shooter.returnPIDInput() < 999999) {
+			Robot.shooter.isReadyForFood = true;
+		} else {
+			Robot.shooter.isReadyForFood = false;
+		}
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -33,7 +33,7 @@ public class OI {
 	JoystickButton feederButton;
 	JoystickButton lifterButton;
 	
-	//			GETTERS				\\ 
+	//			GETTERS				\\
 	public double getDriveY() {
 		if(pilot.getIsXbox()) {
 			return pilot.getRawAxis(Constants.XBOX_DRIVE_FWD) - pilot.getRawAxis(Constants.XBOX_DRIVE_BACK);
@@ -41,7 +41,6 @@ public class OI {
 			return pilot.getY();
 		}
 	}
-	//
 	
 	public double getDriveZ() {
 		if(pilot.getIsXbox()) {
@@ -94,7 +93,7 @@ public class OI {
 		gearIntakeToggle.whenActive(new MoveGearIntake(true));
 		gearIntakeToggle.whenInactive(new MoveGearIntake(false));
 		
-		feederButton.whileHeld(new RunFeeder(Constants.INTAKE_SPEED));
+		feederButton.whileHeld(new RunFeeder());
 		
 		flywheelButton.toggleWhenPressed(new ShooterGroup());
 		lifterButton.whileHeld(new RunLifter(true));
