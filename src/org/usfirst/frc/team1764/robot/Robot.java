@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1764.robot.commands.AutoGroup;
 import org.usfirst.frc.team1764.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1764.robot.subsystems.Chassis;
 import org.usfirst.frc.team1764.robot.subsystems.ExampleSubsystem;
@@ -56,6 +57,7 @@ public class Robot extends IterativeRobot {
 		chassis.setShifter(false);
 		
 		chooser.addDefault("Default Auto", new ExampleCommand());
+		chooser.addObject("Good Auto", new AutoGroup());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}

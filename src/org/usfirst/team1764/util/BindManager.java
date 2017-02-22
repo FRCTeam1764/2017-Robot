@@ -2,7 +2,6 @@ package org.usfirst.team1764.util;
 
 import java.util.HashMap;
 import java.util.concurrent.Callable;
-import java.util.function.Function;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,7 +30,6 @@ public class BindManager {
 	}
 	
 	private abstract class BindableCommand {
-		protected boolean bound = false;
 	}
 	
 	public abstract class SingleInputCommand extends BindableCommand {
@@ -39,8 +37,7 @@ public class BindManager {
 		protected abstract void execute(double input);
 		
 		public void execute() {
-			if(bound)
-				execute(getInput());
+			execute(getInput());
 		}
 		
 		private double getInput() {
@@ -60,8 +57,7 @@ public class BindManager {
 		protected abstract void execute(double inputOne, double inputTwo);
 		
 		public void execute() {
-			if(bound)
-				execute(getInputOne(), getInputTwo());
+			execute(getInputOne(), getInputTwo());
 		}
 		
 		private double getInputOne() {
@@ -87,6 +83,14 @@ public class BindManager {
 		SingleInputCommand command;
 		
 		public RobotInputFunction(SingleInputCommand command) {
+			this.command = command;
+		}
+	}
+	
+	public class RobotTwoInputFunction {
+		DoubleInputCommand command;
+		
+		public RobotTwoInputFunction(DoubleInputCommand command) {
 			this.command = command;
 		}
 	}
