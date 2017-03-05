@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoGroup extends CommandGroup {
+public class StraightAuto extends CommandGroup {
 
-    public AutoGroup() {
+    public StraightAuto() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,11 +24,8 @@ public class AutoGroup extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new DriveStraight(0.5, 5));
-    	addSequential(new ResetGyro());
-    	addSequential(new DriveWithGyro(90, 10));
-    	addSequential(new DriveStraight(0, 1));
-    	addSequential(new DriveStraight(0.5, 1));
+    	//addSequential(new AllignCamera(0.0, 0.4));
+    	addSequential(new DriveStraight(0.5, 2));
     	addSequential(new MoveGearIntake(true));
     	addSequential(new DriveStraight(0, 1));
     	addSequential(new DriveStraight(-0.5, 1));

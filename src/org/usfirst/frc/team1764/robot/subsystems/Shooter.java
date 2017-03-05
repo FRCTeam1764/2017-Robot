@@ -22,7 +22,7 @@ public class Shooter extends PIDSubsystem {
 	Encoder encoder;
 	
 	public void DEBUGREMOVE() {
-		System.out.println(returnPIDInput());
+		System.out.println("fdsasadf" + Double.toString(returnPIDInput()));
 	}
 	
 	public Shooter() {
@@ -34,6 +34,7 @@ public class Shooter extends PIDSubsystem {
 		} else {
 			this.flywheel = new Talon(RobotMap.PORT_SHOOTER_FLYWHEEL);
 		}
+		this.encoder = new Encoder(0,1);
 		
 	}
 

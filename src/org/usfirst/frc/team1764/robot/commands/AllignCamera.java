@@ -9,10 +9,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveWithJoystick extends Command {
-	double leftSpeed,rightSpeed;
+public class AllignCamera extends Command {
+	double offset;
+	double threshold;
 
-    public DriveWithJoystick() {
+    public AllignCamera(double offset, double threshold) {
+    	this.offset = offset;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
@@ -24,30 +26,22 @@ public class DriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.getDouble("IR", Robot.chassis.getIR());
-    	if (Robot.oi.shouldTrack()) {
-    		double center = Tracking.getCenter();
-    		double rotation = 0;
-    	    //double rotation = Math.cbrt(Tracking.getCenter())/Math.cbrt(200);
-    	    if (center < -0.3)
-    	    		rotation = -0.2;
-    	    if (center > 0.3)
-    	   		rotation = 0.2;
-    	   	if (center > -0.3 && center < 0.3)
-    	   		rotation = center / 0.3 * 0.2;
+		double center = Tracking.getCenter() + offset;
+		double rotation = 0;
+		if (center < -threshold)
+				rotation = -0.15;
+		if (center > threshold)
+			   rotation = 0.15;
+		   if (center > -threshold && center < threshold)
+			   rotation = center / threshold * 0.15;
     	        	
-    	    leftSpeed = rotation + Robot.oi.getDriveY();
-    	    rightSpeed = -rotation + Robot.oi.getDriveY();
-    	} else {
-			leftSpeed = Robot.oi.getDriveY() - Robot.oi.getDriveZ();
-			rightSpeed = Robot.oi.getDriveY() + Robot.oi.getDriveZ();
-    	}
-    	Robot.chassis.setSpeedBoth(leftSpeed, rightSpeed);
+    	Robot.chassis.setSpeedBoth(rotation, -rotation);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	double center = Tracking.getCenter();
+    	return center < threshold && center > -threshold;
     }
 
     // Called once after isFinished returns true

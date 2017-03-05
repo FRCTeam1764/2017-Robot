@@ -1,50 +1,54 @@
 package org.usfirst.frc.team1764.robot.commands;
 
-import org.usfirst.frc.team1764.robot.Constants;
 import org.usfirst.frc.team1764.robot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class RunShooter extends Command {
+public class TurnToAngle extends Command {
+	final double angle;
+	double error;
+	double tolerance;
 	
-    public RunShooter() {
+    public TurnToAngle(double angle, double tolerance) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.shooter);
+    	requires(Robot.chassis);
+    	requires(Robot.gyro);
+    	
+    	this.tolerance = tolerance;
+    	this.angle = angle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.gyro.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooter.set(Constants.FLYWHEEL_SPEED);
-    	Robot.shooter.DEBUGREMOVE();
-    	if (Robot.shooter.returnPIDInput() > 3.9 && Robot.shooter.returnPIDInput() < 4.1) {
-			Robot.shooter.isReadyForFood = true;
-		} else {
-			Robot.shooter.isReadyForFood = false;
-		}
+    	error = angle - Robot.gyro.getAngle();
+    	double errorPol = error / Math.abs(error);
+    	
+    	Robot.chassis.setSpeedLeft(0.25*errorPol);
+    	Robot.chassis.setSpeedRight(0.25*errorPol);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Math.abs(error) <= tolerance;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.set(0);
+    	Robot.chassis.disable();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shooter.set(0);
+    	Robot.chassis.disable();
     }
 }

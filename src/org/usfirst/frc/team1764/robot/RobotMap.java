@@ -11,6 +11,8 @@ public class RobotMap {
 
 	public static int PORT_SHOOTER_FLYWHEEL = 2;
 	
+	public static int PORT_GYRO = 0;
+	
 	//				CHASSIS						\\
 	public static int PORT_CHASSIS_LEFT_FRONT = 0;
 	public static int PORT_CHASSIS_LEFT_BACK = 1;

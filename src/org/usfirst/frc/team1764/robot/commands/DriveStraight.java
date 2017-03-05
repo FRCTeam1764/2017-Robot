@@ -3,16 +3,23 @@ package org.usfirst.frc.team1764.robot.commands;
 import org.usfirst.frc.team1764.robot.Robot;
 import org.usfirst.frc.team1764.robot.Tracking;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class DriveWithJoystick extends Command {
-	double leftSpeed,rightSpeed;
+public class DriveStraight extends Command {
+	double target, threshold;
+	double speed;
+	Timer timer;
+	double time;
 
-    public DriveWithJoystick() {
+    public DriveStraight(double speed, double time) {
+    	this.threshold = 10;
+    	this.speed = speed;
+    	this.timer = new Timer();
+    	this.time = time;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
@@ -20,34 +27,20 @@ public class DriveWithJoystick extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	target = Robot.chassis.getGyroAngle();
+    	timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.getDouble("IR", Robot.chassis.getIR());
-    	if (Robot.oi.shouldTrack()) {
-    		double center = Tracking.getCenter();
-    		double rotation = 0;
-    	    //double rotation = Math.cbrt(Tracking.getCenter())/Math.cbrt(200);
-    	    if (center < -0.3)
-    	    		rotation = -0.2;
-    	    if (center > 0.3)
-    	   		rotation = 0.2;
-    	   	if (center > -0.3 && center < 0.3)
-    	   		rotation = center / 0.3 * 0.2;
-    	        	
-    	    leftSpeed = rotation + Robot.oi.getDriveY();
-    	    rightSpeed = -rotation + Robot.oi.getDriveY();
-    	} else {
-			leftSpeed = Robot.oi.getDriveY() - Robot.oi.getDriveZ();
-			rightSpeed = Robot.oi.getDriveY() + Robot.oi.getDriveZ();
-    	}
-    	Robot.chassis.setSpeedBoth(leftSpeed, rightSpeed);
+    	double angle = Robot.chassis.getGyroAngle();
+  		double rotation = (angle-target) / threshold * 0.2;
+    	Robot.chassis.setSpeedBoth(rotation + speed, -rotation + speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	return timer.get() >= time;
     }
 
     // Called once after isFinished returns true

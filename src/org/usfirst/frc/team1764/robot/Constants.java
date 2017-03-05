@@ -13,14 +13,14 @@ public class Constants {
 	 * IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	 * THIS MUST BE TRUE IF YOU ARE USING THE COMPETITION ROBOT OR CERTAIN PARTS MAY NOT WORK!
 	 */
-	public static boolean ROBOT_IS_COMPETITION_ROBOT = true; 
+	public static boolean ROBOT_IS_COMPETITION_ROBOT = false; 
 	
 	public static int XBOX_DRIVE_TURNING = 0;
-	public static int XBOX_DRIVE_FWD = 2;
-	public static int XBOX_DRIVE_BACK = 3;
+	public static int XBOX_DRIVE_FWD = 3;
+	public static int XBOX_DRIVE_BACK = 2;
 		
 	//Should the pilot control everything?
-	public static boolean COPILOT_ENABLED = true;
+	public static boolean COPILOT_ENABLED = false;
 	
 	
 	//Button id for shift up and shift down buttons
@@ -48,13 +48,14 @@ public class Constants {
 	public static int PILOT_CLIMBER_BUTTON = 6;
 	
 	public static int PILOT_XBOX_FUELINTAKE_BUTTON = 3;//X
-	public static int PILOT_XBOX_GEARINTAKE_TOGGLE_BUTTON = 2;
+	public static int PILOT_XBOX_GEARINTAKE_TOGGLE_BUTTON = 2;//B
 	public static int PILOT_XBOX_FLYWHEEL_BUTTON = 1; //A
 	public static int PILOT_XBOX_FEEDER_BUTTON = 8; //START
 	public static int PILOT_XBOX_LIFTER_BUTTON = 4; //Y
-
+	public static int PILOT_XBOX_ALIGN_BUTTON = 10; //right stick press
 	//Speed setting for fuel intake
-	public static double FUELINTAKE_SPEED_BOTH = 1.0;
+	public static double FUELINTAKE_SPEED_BOTH = -1.0;
+	
 	
 	//Speed for flywheel
 	//DO NOT CHANGE THESE VALUES -AUSTIN
@@ -68,7 +69,7 @@ public class Constants {
 	public static double LIFTER_SPEED = 1.0;
 	public static boolean LIFTER_ISINVERTED = true;
 	
-	public static boolean USE_PID_INTAKE_DELAY = true; //true: use more accurate delays for feeding that wait for the flywheel to be at a precise speed - false: use timed measurements
+	public static boolean USE_PID_INTAKE_DELAY = false; //true: use more accurate delays for feeding that wait for the flywheel to be at a precise speed - false: use timed measurements
 	
 	public static int TIMED_BASED_INTAKE_DELAY = 4; // 1/x seconds, ex. if it is 2 it will run for 1/2 second, stop, then repeat
 }

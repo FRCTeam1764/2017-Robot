@@ -4,15 +4,17 @@ import org.usfirst.frc.team1764.robot.Robot;
 import org.usfirst.frc.team1764.robot.Tracking;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class DriveWithJoystick extends Command {
+public class DriveWithGyro extends Command {
 	double leftSpeed,rightSpeed;
+	double target, threshold;
 
-    public DriveWithJoystick() {
+    public DriveWithGyro(double target, double threshold) {
+    	this.target = target;
+    	this.threshold = threshold;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
@@ -24,30 +26,15 @@ public class DriveWithJoystick extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.getDouble("IR", Robot.chassis.getIR());
-    	if (Robot.oi.shouldTrack()) {
-    		double center = Tracking.getCenter();
-    		double rotation = 0;
-    	    //double rotation = Math.cbrt(Tracking.getCenter())/Math.cbrt(200);
-    	    if (center < -0.3)
-    	    		rotation = -0.2;
-    	    if (center > 0.3)
-    	   		rotation = 0.2;
-    	   	if (center > -0.3 && center < 0.3)
-    	   		rotation = center / 0.3 * 0.2;
-    	        	
-    	    leftSpeed = rotation + Robot.oi.getDriveY();
-    	    rightSpeed = -rotation + Robot.oi.getDriveY();
-    	} else {
-			leftSpeed = Robot.oi.getDriveY() - Robot.oi.getDriveZ();
-			rightSpeed = Robot.oi.getDriveY() + Robot.oi.getDriveZ();
-    	}
-    	Robot.chassis.setSpeedBoth(leftSpeed, rightSpeed);
+    	double angle = Robot.chassis.getGyroAngle();
+  		double rotation = (angle-target) / threshold * 0.2;
+    	Robot.chassis.setSpeedBoth(rotation, -rotation);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	double angle = Robot.chassis.getGyroAngle();
+    	return angle > target - threshold && angle < target + threshold;
     }
 
     // Called once after isFinished returns true

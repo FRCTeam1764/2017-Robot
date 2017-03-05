@@ -3,21 +3,31 @@ package org.usfirst.frc.team1764.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1764.robot.commands.AlignWithCamera;
 import org.usfirst.frc.team1764.robot.commands.AutoGroup;
+import org.usfirst.frc.team1764.robot.commands.DriveStraight;
+import org.usfirst.frc.team1764.robot.commands.DriveWithGyro;
 import org.usfirst.frc.team1764.robot.commands.ExampleCommand;
+import org.usfirst.frc.team1764.robot.commands.LeftAuto;
+import org.usfirst.frc.team1764.robot.commands.StraightAuto;
+import org.usfirst.frc.team1764.robot.commands.RightAuto;
+import org.usfirst.frc.team1764.robot.subsystems.CameraTracker;
 import org.usfirst.frc.team1764.robot.subsystems.Chassis;
 import org.usfirst.frc.team1764.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team1764.robot.subsystems.Feeder;
 import org.usfirst.frc.team1764.robot.subsystems.FuelIntake;
 import org.usfirst.frc.team1764.robot.subsystems.GearIntake;
+import org.usfirst.frc.team1764.robot.subsystems.Gyro;
 import org.usfirst.frc.team1764.robot.subsystems.Lifter;
 import org.usfirst.frc.team1764.robot.subsystems.PneumaticsCompressor;
 import org.usfirst.frc.team1764.robot.subsystems.Shooter;
@@ -36,32 +46,38 @@ public class Robot extends IterativeRobot {
 	public static final Chassis chassis = new Chassis();
 	public static final FuelIntake fuelIntake = new FuelIntake();
 	public static final GearIntake gearIntake = new GearIntake();
+	public static final Gyro gyro = new Gyro();
+	public static final CameraTracker camTrack = new CameraTracker();
 	public static final Shooter shooter = new Shooter();
 	public static final Feeder feeder = new Feeder();
 	public static final Lifter lifter = new Lifter();
+	
+	public static Tracking tracking;
 
 	public static OI oi;
-	public static Sensors sensors;
+	public static NetworkTable table;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
-
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		CameraServer.getInstance().startAutomaticCapture();
+		CameraServer.getInstance().startAutomaticCapture(0);
+		tracking = new Tracking();
+		tracking.start();
 		oi = new OI();
-		sensors = new Sensors();
 		
 		chassis.setShifter(false);
-		
-		chooser.addDefault("Default Auto", new ExampleCommand());
-		chooser.addObject("Good Auto", new AutoGroup());
+		table = NetworkTable.getTable("cam");
+		chooser.addDefault("Straight Auto", new ExampleCommand());
+		chooser.addObject("Left Auto", new LeftAuto());
+		chooser.addObject("Right Auto", new RightAuto());
 		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Auto Mode", chooser);
 	}
 
 	/**
@@ -93,14 +109,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
 			autonomousCommand.start();

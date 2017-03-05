@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import org.usfirst.frc.team1764.robot.commands.AlignWithCamera;
 import org.usfirst.frc.team1764.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1764.robot.commands.MoveGearIntake;
 import org.usfirst.frc.team1764.robot.commands.RunFeeder;
@@ -32,6 +33,7 @@ public class OI {
 	
 	JoystickButton feederButton;
 	JoystickButton lifterButton;
+	JoystickButton alignButton;
 	
 	//			GETTERS				\\
 	public double getDriveY() {
@@ -50,10 +52,14 @@ public class OI {
 		}
 	}
 	
+	public boolean shouldTrack() {
+		return pilot.getRawButton(Constants.PILOT_XBOX_ALIGN_BUTTON);
+	}
+	
 	public OI() {
 		pilot = new Joystick(0);
 		copilot = new Joystick(1);
-		
+		alignButton = new JoystickButton(pilot, Constants.PILOT_XBOX_ALIGN_BUTTON);
 		//Assign Buttons
 		if(Constants.COPILOT_ENABLED) {
 			runFuelIntake = new JoystickButton(copilot, Constants.COPILOT_FUELINTAKE_BUTTON);
@@ -73,6 +79,7 @@ public class OI {
 				feederButton = new JoystickButton(pilot, Constants.PILOT_FEEDER_BUTTON);
 			}
 		} if(pilot.getIsXbox()) {
+			
 			shiftHigh = new JoystickButton(pilot, Constants.PILOT_XBOX_SHIFT_UP_BUTTON);
 			shiftLow = new JoystickButton(pilot, Constants.PILOT_XBOX_SHIFT_DOWN_BUTTON);
 			lifterButton = new JoystickButton(pilot, Constants.PILOT_XBOX_LIFTER_BUTTON);
@@ -97,5 +104,6 @@ public class OI {
 		
 		flywheelButton.toggleWhenPressed(new ShooterGroup());
 		lifterButton.whileHeld(new RunLifter(true));
+		//alignButton.whileHeld(new AlignWithCamera(3.0));
 	}
 }
