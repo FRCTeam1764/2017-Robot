@@ -16,7 +16,6 @@ public class TurnToAngle extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.chassis);
-    	requires(Robot.gyro);
     	
     	this.tolerance = tolerance;
     	this.angle = angle;
@@ -24,12 +23,12 @@ public class TurnToAngle extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gyro.reset();
+    	Robot.chassis.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	error = angle - Robot.gyro.getAngle();
+    	error = angle - Robot.chassis.getGyroAngle();
     	double errorPol = error / Math.abs(error);
     	
     	Robot.chassis.setSpeedLeft(0.25*errorPol);

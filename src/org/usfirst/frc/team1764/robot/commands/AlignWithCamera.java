@@ -19,20 +19,19 @@ public class AlignWithCamera extends Command {
     public AlignWithCamera(double tolerance) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.gyro);
     	requires(Robot.chassis);
-    	requires(Robot.camTrack);
+    	//requires(Robot.camTrack);
     	
     	this.tolerance = tolerance;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.gyro.reset();
+    	/*Robot.gyro.reset();
     	Robot.camTrack.update();
     	Robot.chassis.enable();
     	targetAngle = Robot.camTrack.getAngle();
-    	Robot.chassis.setSetpoint(targetAngle);
+    	Robot.chassis.setSetpoint(targetAngle);*/
 //    	if(!moving && Robot.camTrack.update()) {
 //    		moving = true;
 //    		targetAngle = Robot.camTrack.getAngle();

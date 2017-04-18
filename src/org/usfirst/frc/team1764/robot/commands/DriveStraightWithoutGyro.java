@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1764.robot.commands;
 
-import org.usfirst.frc.team1764.robot.Constants;
 import org.usfirst.frc.team1764.robot.Robot;
+import org.usfirst.frc.team1764.robot.Tracking;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,45 +9,48 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class RunShooter extends Command {
-	
-    public RunShooter() {
+public class DriveStraightWithoutGyro extends Command {
+	double target, threshold;
+	double speed;
+	Timer timer;
+	double time;
+
+    public DriveStraightWithoutGyro(double speed, double time) {
+    	this.threshold = 10;
+    	this.speed = speed;
+    	this.timer = new Timer();
+    	this.time = time;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.shooter);
+    	requires(Robot.chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	target = Robot.chassis.getGyroAngle();
+    	timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Constants.USE_PID_INTAKE_DELAY) {
-    		Robot.shooter.usePIDOutput(.75);//Constants.FLYWHEEL_SPEED); //TODO: Adjust speed
-    	} else {
-    		Robot.shooter.set(Constants.FLYWHEEL_SPEED);
-    	}
-    	if (Robot.shooter.returnPIDInput() == 3631.9612590799034) {//> 3.9 && Robot.shooter.returnPIDInput() < 4.1) {
-			Robot.shooter.isReadyForFood = true;
-		} else {
-			Robot.shooter.isReadyForFood = false;
-		}
+    	double angle = Robot.chassis.getGyroAngle();
+  		double rotation = (angle-target) / threshold * 0.2;
+    	Robot.chassis.setSpeedBoth(rotation + speed, -rotation + speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	return timer.get() >= time;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.set(0);
+    	Robot.chassis.setSpeedBoth(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.shooter.set(0);
+    	Robot.chassis.setSpeedBoth(0, 0);
     }
 }

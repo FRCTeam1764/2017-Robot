@@ -25,10 +25,21 @@ public class StraightAuto extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	//addSequential(new AllignCamera(0.0, 0.4));
-    	addSequential(new DriveStraight(0.5, 2));
-    	addSequential(new MoveGearIntake(true));
-    	addSequential(new DriveStraight(0, 1));
-    	addSequential(new DriveStraight(-0.5, 1));
+//    	addSequential(new DriveStraight(0,5));
+
+    	/*addSequential(new MoveGearIntake(true));
+    	addSequential(new DriveStraightUntilDistanceWithoutGyro(0.3, 0.299));
+    	addSequential(new DriveStraightWithoutGyro(0,1.25));
     	addSequential(new MoveGearIntake(false));
+    	addSequential(new DriveStraightWithoutGyro(0,1.5));
+    	addSequential(new DriveStraightWithoutGyro(-0.5, 2));*/
+    	
+    	addSequential(new ResetGyro());
+    	addSequential(new MoveGearIntake(true));
+    	addSequential(new DriveStraight(0.3, 4.60));
+    	addSequential(new DriveStraight(0,1.25));
+    	addSequential(new MoveGearIntake(false));
+    	addSequential(new DriveStraight(0,1.5));
+    	addSequential(new DriveStraight(-0.5, 1.25));
     }
 }

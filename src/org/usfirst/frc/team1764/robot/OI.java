@@ -13,6 +13,7 @@ import org.usfirst.frc.team1764.robot.commands.RunLifter;
 import org.usfirst.frc.team1764.robot.commands.RunShooter;
 import org.usfirst.frc.team1764.robot.commands.Shift;
 import org.usfirst.frc.team1764.robot.commands.ShooterGroup;
+import org.usfirst.frc.team1764.robot.commands.UltrasonicDebug;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -34,6 +35,8 @@ public class OI {
 	JoystickButton feederButton;
 	JoystickButton lifterButton;
 	JoystickButton alignButton;
+	
+	JoystickButton backdriveButton;
 	
 	//			GETTERS				\\
 	public double getDriveY() {
@@ -60,6 +63,7 @@ public class OI {
 		pilot = new Joystick(0);
 		copilot = new Joystick(1);
 		alignButton = new JoystickButton(pilot, Constants.PILOT_XBOX_ALIGN_BUTTON);
+		
 		//Assign Buttons
 		if(Constants.COPILOT_ENABLED) {
 			runFuelIntake = new JoystickButton(copilot, Constants.COPILOT_FUELINTAKE_BUTTON);
@@ -72,6 +76,8 @@ public class OI {
 				gearIntakeToggle = new JoystickButton(pilot, Constants.PILOT_XBOX_GEARINTAKE_TOGGLE_BUTTON);
 				flywheelButton = new JoystickButton(pilot, Constants.PILOT_XBOX_FLYWHEEL_BUTTON);
 				feederButton = new JoystickButton(pilot, Constants.PILOT_XBOX_FEEDER_BUTTON);
+				backdriveButton = new JoystickButton(pilot,Constants.PILOT_XBOX_BACKDRIVELIFTER_BUTTON);
+				
 			} else {
 				runFuelIntake = new JoystickButton(pilot, Constants.PILOT_FUELINTAKE_BUTTON);
 				gearIntakeToggle = new JoystickButton(pilot, Constants.PILOT_GEARINTAKE_TOGGLE_BUTTON);
@@ -88,7 +94,8 @@ public class OI {
 			shiftLow = new JoystickButton(pilot, Constants.PILOT_SHIFT_DOWN_BUTTON);
 			lifterButton = new JoystickButton(pilot, Constants.PILOT_LIFTER_BUTTON);
 		}
-		
+		lifterButton = new JoystickButton(pilot, 4);
+
 		////////////////
 		
 		//Bind buttons to commands
@@ -97,13 +104,16 @@ public class OI {
 		
 		runFuelIntake.whileHeld(new RunFuelIntake());
 		
-		gearIntakeToggle.whenActive(new MoveGearIntake(true));
-		gearIntakeToggle.whenInactive(new MoveGearIntake(false));
+		gearIntakeToggle.whenActive(new MoveGearIntake(false));
+		gearIntakeToggle.whenInactive(new MoveGearIntake(true));
 		
-		feederButton.whileHeld(new RunFeeder());
+		feederButton.toggleWhenPressed(new RunFeeder());
+		//feederButton.whenPressed(new UltrasonicDebug());
 		
-		flywheelButton.toggleWhenPressed(new ShooterGroup());
+		flywheelButton.toggleWhenPressed(new RunShooter());
 		lifterButton.whileHeld(new RunLifter(true));
+//		backdriveButton.whileHeld(new RunLifter(false));
+		
 		//alignButton.whileHeld(new AlignWithCamera(3.0));
 	}
 }

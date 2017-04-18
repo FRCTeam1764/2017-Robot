@@ -16,11 +16,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1764.robot.commands.AlignWithCamera;
 import org.usfirst.frc.team1764.robot.commands.AutoGroup;
 import org.usfirst.frc.team1764.robot.commands.DriveStraight;
+import org.usfirst.frc.team1764.robot.commands.DriveToNeutral;
 import org.usfirst.frc.team1764.robot.commands.DriveWithGyro;
 import org.usfirst.frc.team1764.robot.commands.ExampleCommand;
 import org.usfirst.frc.team1764.robot.commands.LeftAuto;
 import org.usfirst.frc.team1764.robot.commands.StraightAuto;
 import org.usfirst.frc.team1764.robot.commands.RightAuto;
+import org.usfirst.frc.team1764.robot.commands.RunLifter;
 import org.usfirst.frc.team1764.robot.subsystems.CameraTracker;
 import org.usfirst.frc.team1764.robot.subsystems.Chassis;
 import org.usfirst.frc.team1764.robot.subsystems.ExampleSubsystem;
@@ -31,6 +33,7 @@ import org.usfirst.frc.team1764.robot.subsystems.Gyro;
 import org.usfirst.frc.team1764.robot.subsystems.Lifter;
 import org.usfirst.frc.team1764.robot.subsystems.PneumaticsCompressor;
 import org.usfirst.frc.team1764.robot.subsystems.Shooter;
+import org.usfirst.frc.team1764.robot.subsystems.UltrasonicSub;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -46,11 +49,11 @@ public class Robot extends IterativeRobot {
 	public static final Chassis chassis = new Chassis();
 	public static final FuelIntake fuelIntake = new FuelIntake();
 	public static final GearIntake gearIntake = new GearIntake();
-	public static final Gyro gyro = new Gyro();
-	public static final CameraTracker camTrack = new CameraTracker();
+	//public static final CameraTracker camTrack = new CameraTracker();
 	public static final Shooter shooter = new Shooter();
 	public static final Feeder feeder = new Feeder();
 	public static final Lifter lifter = new Lifter();
+	public static final UltrasonicSub UltrasonicSub = new UltrasonicSub();
 	
 	public static Tracking tracking;
 
@@ -60,24 +63,29 @@ public class Robot extends IterativeRobot {
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		CameraServer.getInstance().startAutomaticCapture(0);
-		tracking = new Tracking();
-		tracking.start();
+//		CameraServer.getInstance().startAutomaticCapture(0);
+		//tracking = new Tracking();
+		//tracking.start();
 		oi = new OI();
-		
 		chassis.setShifter(false);
 		table = NetworkTable.getTable("cam");
-		chooser.addDefault("Straight Auto", new ExampleCommand());
+		chooser.addDefault("Straight Auto", new StraightAuto());
 		chooser.addObject("Left Auto", new LeftAuto());
-		chooser.addObject("Right Auto", new RightAuto());
+		chooser.addObject("Right Auto", new RightAuto()); //apparently is straight auto. investigate
+		chooser.addObject("Goto Neutral & Back Auto", new DriveToNeutral()); //apparently is straight auto. investigate
+		chooser.addObject("WILL BACKDRIVE(DO NOT USE IN COMPETITION!!!", new RunLifter(!Constants.LIFTER_ISINVERTED));
+		
+
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto Mode", chooser);
+				
 	}
 
 	/**
@@ -109,6 +117,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
+		//autonomousCommand = new LeftAuto();
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
 			autonomousCommand.start();
@@ -128,6 +137,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
+		
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 	}

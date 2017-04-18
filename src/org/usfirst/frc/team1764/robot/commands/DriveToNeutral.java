@@ -5,9 +5,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class LeftAuto extends CommandGroup {
+public class DriveToNeutral extends CommandGroup {
 
-    public LeftAuto() {
+    public DriveToNeutral() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -23,19 +23,10 @@ public class LeftAuto extends CommandGroup {
         // would require.
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
-        // arm.]
-    	
-    	//addSequential(new AllignCamera(0.0, 0.4));
-//    	System.out.println("leftAuto");
+        // arm.
     	addSequential(new ResetGyro());
-    	addSequential(new MoveGearIntake(true));
-    	addSequential(new DriveStraight(0.5, 2.25));
-    	addSequential(new DriveWithGyro(-60, 5));
-    	addSequential(new DriveStraight(0.0, 2));
-    	addSequential(new DriveWithGyro(-60, 5));
-    	addSequential(new DriveStraight(0.5, 2));
-    	addSequential(new DriveStraight(0, 1));
-    	addSequential(new MoveGearIntake(false));
-    	addSequential(new DriveStraight(-0.5, 1));
+    	addSequential(new DriveStraight(0.5,5));
+    	addSequential(new DriveStraight(0,1));
+    	addSequential(new DriveStraight(-0.5,2.5));
     }
 }

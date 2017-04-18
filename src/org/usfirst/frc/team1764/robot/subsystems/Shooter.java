@@ -3,6 +3,7 @@ package org.usfirst.frc.team1764.robot.subsystems;
 import org.usfirst.frc.team1764.robot.Constants;
 import org.usfirst.frc.team1764.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -21,9 +22,6 @@ public class Shooter extends PIDSubsystem {
 	public boolean isReadyForFood;
 	Encoder encoder;
 	
-	public void DEBUGREMOVE() {
-		System.out.println("fdsasadf" + Double.toString(returnPIDInput()));
-	}
 	
 	public Shooter() {
 		super("Flywheel",0.01,0,0.01);
@@ -34,7 +32,13 @@ public class Shooter extends PIDSubsystem {
 		} else {
 			this.flywheel = new Talon(RobotMap.PORT_SHOOTER_FLYWHEEL);
 		}
-		this.encoder = new Encoder(0,1);
+		this.encoder = new Encoder(0,1,false);
+		encoder.setMaxPeriod(0.1);
+		encoder.setMinRate(10);
+		encoder.setDistancePerPulse(5);
+		encoder.setReverseDirection(false);
+		encoder.setSamplesToAverage(127);
+		//this.encoder.setSamplesToAverage(7);
 		
 	}
 
@@ -46,8 +50,16 @@ public class Shooter extends PIDSubsystem {
     public void set(double val) {
     	flywheel.set(val);
     }
+  /* public void startEncoder()
+    {
+    	encoder.start();
+    }*/
     public double returnPIDInput() {
-    	return encoder.getSamplesToAverage();
+//    	return encoder.getSamplesToAverage();
+//    	return encoder.getRate();
+    	return encoder.getRate();
+//    	return encoder.getCount();
+//    	return encoder.getDistance()/encoder.getRaw(); //WORKING
     }
     public void usePIDOutput(double output) {
     	flywheel.pidWrite(output);

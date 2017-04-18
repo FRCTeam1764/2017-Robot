@@ -16,7 +16,6 @@ public class DriveStraight extends Command {
 	double time;
 
     public DriveStraight(double speed, double time) {
-    	this.threshold = 10;
     	this.speed = speed;
     	this.timer = new Timer();
     	this.time = time;
@@ -27,15 +26,12 @@ public class DriveStraight extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	target = Robot.chassis.getGyroAngle();
     	timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double angle = Robot.chassis.getGyroAngle();
-  		double rotation = (angle-target) / threshold * 0.2;
-    	Robot.chassis.setSpeedBoth(rotation + speed, -rotation + speed);
+    	Robot.chassis.setSpeedBoth(speed, speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -31,6 +31,8 @@ public class RobotMap {
 	public static int PORT_BALLINTAKE_NOODLE = 1;
 	public static int PORT_BALLINTAKE_BELT = 0;
 	
+	public static int PORT_ULTRASONIC = 5;
+	
 	//				CLIMBING   					\\
-	public static int PORT_CLIMBER_MOTOR = 4;
+//	public static int PORT_CLIMBER_MOTOR = 4;
 }

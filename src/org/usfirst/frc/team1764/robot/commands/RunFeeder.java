@@ -27,20 +27,22 @@ public class RunFeeder extends Command {
  
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Constants.USE_PID_INTAKE_DELAY) {
-    		if (Robot.shooter.isReadyForFood) {
-    			Robot.feeder.set(Constants.INTAKE_SPEED);
-    		} else {
-    			Robot.feeder.set(0);
-    		}
-    	} else {
-	        if (Math.floor(timer.get()*Constants.TIMED_BASED_INTAKE_DELAY) % 2 == 0) { //runs in intervals of 1/the constant value
-	            Robot.feeder.set(0);
-	        }
-	        else {
-	            Robot.feeder.set(Constants.INTAKE_SPEED);
-	        }
-    	}
+//    	if (Constants.USE_PID_INTAKE_DELAY) {
+//    		if (Robot.shooter.isReadyForFood) {
+//    			Robot.feeder.set(Constants.INTAKE_SPEED);
+//    		} else {
+//    			Robot.feeder.set(0);
+//    		}
+//    	} else {
+//	        if (Math.floor(timer.get()*Constants.TIMED_BASED_INTAKE_DELAY) % 2 == 0) { //runs in intervals of 1/the constant value
+//	            Robot.feeder.set(0);
+//	        }
+//	        else {
+//	            Robot.feeder.set(Constants.INTAKE_SPEED);
+//	        }
+//    	}
+    	Robot.feeder.set(0.8);
+    //	System.out.println("hi");
     }
  
     // Make this return true when this Command no longer needs to run execute()

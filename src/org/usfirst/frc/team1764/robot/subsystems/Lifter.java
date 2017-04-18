@@ -19,7 +19,7 @@ public class Lifter extends Subsystem {
 	
 	public Lifter()
 	{
-		this.lifterMotor = new Talon(RobotMap.PORT_LIFTER);
+		this.lifterMotor = new Talon(4);
 		this.lifterMotor.setInverted(Constants.LIFTER_ISINVERTED);
 	}
 	

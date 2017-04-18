@@ -23,12 +23,14 @@ public class Chassis extends PIDSubsystem {
 	private CANTalon leftFront,leftBack, rightFront, rightBack;
 	private DoubleSolenoid shifter;
 	private static ADXRS450_Gyro gyro;
+	
+	private static Compressor compressor; //REMOVE THIS AND YOU WILL DROP THE GEAR IN AUTONOMOUS. DO. NOT. REMOVE.
 //	private static AnalogInput ir;
 	
 	public Chassis() {
 		super(0.03,0.001,0.0);
 		gyro = new ADXRS450_Gyro();
-//		ir = new AnalogInput(9);
+//		ir = new AnalogInput(9); 
 
 		leftFront = new CANTalon(RobotMap.PORT_CHASSIS_LEFT_FRONT);
 		leftBack = new CANTalon(RobotMap.PORT_CHASSIS_LEFT_BACK);
@@ -36,6 +38,8 @@ public class Chassis extends PIDSubsystem {
 		rightBack = new CANTalon(RobotMap.PORT_CHASSIS_RIGHT_BACK);
 		
 		shifter = new DoubleSolenoid(RobotMap.PORT_CHASSIS_SHIFTER_SOLE_ONE, RobotMap.PORT_CHASSIS_SHIFTER_SOLE_TWO);
+		compressor = new Compressor(0); //DO NOT REMOVE
+		compressor.start(); //DO NOT REMOVE
 	}
 	
     public void initDefaultCommand() {
@@ -64,6 +68,8 @@ public class Chassis extends PIDSubsystem {
     }
     
     public void setSpeedBoth(double leftSpeed, double rightSpeed) {
+    	SmartDashboard.putDouble("Ultrasocnic", Robot.UltrasonicSub.getDistance());
+    	SmartDashboard.putDouble("Gyro", gyro.getAngle());
     	setSpeedLeft(leftSpeed);
     	setSpeedRight(rightSpeed);
     }
@@ -96,8 +102,8 @@ public class Chassis extends PIDSubsystem {
     
 	@Override
 	protected double returnPIDInput() {
-		// TODO Auto-generated method stub
-		return Robot.gyro.getAngle();
+		// TODO Auto-generated method stu
+		return gyro.getAngle();
 	}
 
 	@Override
